@@ -1,7 +1,7 @@
 import { ContactColection } from '../db/models/Contacts.js';
 import { calcPaginationData } from '../utils/calcPaginationData.js';
 
-export const getContacts = async ({ page = 1, perPage = 4 }) => {
+export const getContacts = async ({ page = 1, perPage = 10 }) => {
   const limit = perPage;
   const skip = (page - 1) * limit;
   const data = await ContactColection.find().skip(skip).limit(limit);
