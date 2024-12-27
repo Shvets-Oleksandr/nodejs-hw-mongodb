@@ -25,6 +25,7 @@ export const createContact = (payload) => ContactColection.create(payload);
 export const updateContact = async (id, payload) => {
   const result = await ContactColection.findOneAndUpdate({ _id: id }, payload, {
     new: true,
+    runValidators: true,
   });
   return result;
 };

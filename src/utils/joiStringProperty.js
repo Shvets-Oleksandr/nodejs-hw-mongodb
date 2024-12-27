@@ -1,12 +1,14 @@
 import Joi from 'joi';
 
+import { minLengthString, maxLengthString } from '../constants/contacts.js';
+
 export const createStringProperty = (key, isRequired = false) => {
   let property = Joi.string()
-    .min(3)
-    .max(20)
+    .min(minLengthString)
+    .max(maxLengthString)
     .messages({
-      'string.min': `The "${key}" must be minimum 3 characters`,
-      'string.max': `The "${key}" must be maximum 20 characters`,
+      'string.min': `The "${key}" must be at least ${minLengthString} characters long`,
+      'string.max': `The "${key}" cannot exceed ${maxLengthString} characters`,
     });
 
   if (isRequired) {
