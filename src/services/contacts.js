@@ -6,15 +6,29 @@ export const getContacts = async ({
   perPage = 10,
   sortBy = '_id',
   sortOrder = 'asc',
+  filter = {},
 }) => {
-  console.log(page, perPage, sortBy, sortOrder);
   const limit = perPage;
   const skip = (page - 1) * limit;
-  const data = await ContactColection.find()
+
+  const contactsQuery = ContactColection.find();
+
+  if (filter.contactType) {
+    contactsQuery.where('contactType').equals(filter.contactType);
+  }
+
+  if (filter.isFavourite) {
+    contactsQuery.where('isFavourite').equals(filter.isFavourite);
+  }
+
+  const totalItems = await ContactColection.find()
+    .merge(contactsQuery)
+    .countDocuments();
+
+  const data = await contactsQuery
     .skip(skip)
     .limit(limit)
     .sort({ [sortBy]: sortOrder });
-  const totalItems = await ContactColection.countDocuments();
 
   const paginationData = calcPaginationData({ totalItems, page, perPage });
 
