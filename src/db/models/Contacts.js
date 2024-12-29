@@ -58,4 +58,4 @@ export const sortByList = [
   'contactType',
 ];
 
-export const ContactColection = model('contact', contactSchema);
+export const ContactCollection = model('contact', contactSchema);
