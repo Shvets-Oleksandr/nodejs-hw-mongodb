@@ -38,4 +38,4 @@ sessionSchema.pre('findOneAndUpdate', setUpdateSettings);
 
 sessionSchema.post('findOneAndUpdate', handleSaveError);
 
-export const SessionColoction = model('session', sessionSchema);
+export const SessionCollection = model('session', sessionSchema);
