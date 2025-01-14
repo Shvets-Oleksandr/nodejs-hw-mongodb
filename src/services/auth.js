@@ -99,15 +99,9 @@ export const requestResetToken = async (email) => {
     throw createHttpError(404, 'User not found');
   }
 
-  const resetToken = jwt.sign(
-    {
-      email,
-    },
-    getEnvVar('JWT_SECRET'),
-    {
-      expiresIn: '5m',
-    },
-  );
+  const resetToken = jwt.sign({ email }, getEnvVar('JWT_SECRET'), {
+    expiresIn: '5m',
+  });
 
   const resetPasswordTemplatePath = path.join(
     TEMPLATES_DIR,
