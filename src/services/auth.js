@@ -161,4 +161,6 @@ export const resetPassword = async (payload) => {
     { email: user.email },
     { password: encryptedPassword },
   );
+
+  await SessionCollection.deleteMany({ userId: user._id });
 };
