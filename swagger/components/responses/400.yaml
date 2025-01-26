@@ -21,4 +21,4 @@ content:
           properties:
             message:
               type: string
-              example: '67940f725614cfc not valid id'
+              example: '"name" is required'
