@@ -1,0 +1,47 @@
+tags:
+  - Auth
+summary: Reset pasword
+operationId: resetPwd
+description: "Reset user's pasword with payload"
+security: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - token
+          - pasword
+        properties:
+          token:
+            description: 'JWT token'
+            type: string
+            example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlZ2VqYTEyNDZAaGFsYm92LmNvbSIsImlhdCI6MTczNzkyNTEzMywiZXhwIjoxNzM3OTI1NDMzfQ.2PK1MwrxHdjq_K4NWxywkH3aWcQOdr_igZThh8ma2WA'
+          pasword:
+            description: "New user's pasword"
+            type: string
+            example: 'strongPassword123'
+responses:
+  '200':
+    description: Password was successfully reset!
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Password was successfully reset!
+            data:
+              type: object
+  '400':
+    $ref: ../../../components/responses/400.yaml
+  '404':
+    $ref: ../../../components/responses/404.yaml

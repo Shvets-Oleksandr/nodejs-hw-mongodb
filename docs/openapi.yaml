@@ -33,9 +33,29 @@ paths:
   /auht/login:
     post:
       $ref: ../swagger/paths/auth/login/post.yaml
+  /auht/refresh:
+    post:
+      $ref: ../swagger/paths/auth/refresh/post.yaml
+  /auht/logout:
+    post:
+      $ref: ../swagger/paths/auth/logout/post.yaml
+  /auht/send-reset-email:
+    post:
+      $ref: ../swagger/paths/auth/send-reset-email/post.yaml
+  /auht/reset-pwd:
+    post:
+      $ref: ../swagger/paths/auth/reset-password/post.yaml
 
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: refreshToken
+    sessionIdAuth:
+      type: apiKey
+      in: cookie
+      name: sessionId

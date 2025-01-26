@@ -1,0 +1,13 @@
+tags:
+  - Auth
+summary: Logout user
+operationId: logout
+description: 'Logs out user by removing the refresh token and session ID stored in cookies.'
+security:
+  - cookieAuth: []
+  - sessionIdAuth: []
+responses:
+  '204':
+    description: No сontent!
+  '404':
+    $ref: '../../../components/responses/404.yaml'
