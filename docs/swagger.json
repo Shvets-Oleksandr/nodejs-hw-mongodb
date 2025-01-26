@@ -275,7 +275,7 @@
         }
       }
     },
-    "/contacts/{id}": {
+    "/contacts/{contactId}": {
       "get": {
         "tags": [
           "Contacts"
@@ -355,7 +355,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "contactId",
             "required": true,
             "schema": {
               "type": "string",
@@ -459,7 +459,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "contactId",
             "required": true,
             "schema": {
               "type": "string",
@@ -493,11 +493,15 @@
         "description": "Register a user with payload",
         "security": [],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "name",
+                  "email",
+                  "password"
+                ],
                 "properties": {
                   "name": {
                     "description": "User's name",
@@ -610,6 +614,89 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/auht/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login user",
+        "operationId": "loginUser",
+        "description": "Login a user with payload",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "description": "User's email",
+                    "type": "string",
+                    "example": "user@example.com"
+                  },
+                  "password": {
+                    "description": "User's password",
+                    "type": "string",
+                    "format": "password",
+                    "example": "strongPassword123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully logged in an user!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully logged in an user!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "accessToken"
+                      ],
+                      "properties": {
+                        "accessToken": {
+                          "description": "User's access token",
+                          "type": "string",
+                          "example": "nhjVe18Rmsk6uoqFTsSqeyLjAppcIbhvO4ooYyuS"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
           }
         }
       }
